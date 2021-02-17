@@ -12,7 +12,7 @@ def get_tweets(params):
   req = twitter.get(SEARCH_TWEETS_URL, params = params)
   if req.status_code == 200:
     res = json.loads(req.text)
-    f = open('miharashikouen/miharashikouen.csv', 'at')
+    f = open('test/test.csv', 'at')
     writer = csv.writer(f)
     for line in res['statuses']:
       keyword = params['q']
@@ -22,11 +22,12 @@ def get_tweets(params):
   else:
     print('失敗')
 
-params = {
-  'since': '2021-02-10_00:00:00_JST',
-  'until': '2021-02-10_23:59:59_JST',
-  'exclude': 'retweets',
-  'count': SEARCH_COUNT,
-  'q': '見晴公園'
-}
-get_tweets(params)
+for day in list(range(11, 18)):
+  params = {
+    'since': f'2021-02-{day}_00:00:00_JST',
+    'until': f'2021-02-{day}_23:59:59_JST',
+    'exclude': 'retweets',
+    'count': SEARCH_COUNT,
+    'q': 'テスト'
+  }
+  get_tweets(params)
