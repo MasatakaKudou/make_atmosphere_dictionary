@@ -5,8 +5,8 @@ import deleteBelowThreshold as d # 閾値以下削除
 import plot as p # グラフを描画
 
 ### 名詞を定義 ###
-ja_noun = 'テスト'
-en_noun = 'test'
+ja_noun = 'ラッキーピエロ'
+en_noun = 'lucky'
 
 ### 名詞・形容詞・共起度をセットで辞書に登録 ###
 # インスタンス作成
