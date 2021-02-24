@@ -3,6 +3,7 @@
 # 形態素解析に使う
 import MeCab
 import re
+import json
 
 # MeCabの準備
 mecab = MeCab.Tagger('-d /Users/kudoumasataka/my_local/homebrew/lib/mecab/dic/mecab-ipadic-neologd')
@@ -23,6 +24,9 @@ def wakati_text(text):
   while node:
     # 単語の原型を取得
     word = node.feature.split(",")[6]
+    # FESTA!!はフェスタに変更
+    if word == 'FESTA!!':
+      word = 'フェスタ'
     # 品詞
     pos = node.feature.split(',')[0]
     # 名詞の種類
@@ -35,5 +39,22 @@ def wakati_text(text):
     node = node.next
   return adjective_words
 
-a = wakati_text(text)
-print(list(set(a)))
+noun_list = list(set(wakati_text(text)))
+event_atmosphere = {}
+event_atmosphere_dict = {}
+json_file = open('atmosphere.json', 'r')
+json_load = json.load(json_file)
+for noun in noun_list:
+  if noun in json_load.keys():
+    for atmosphere_key in json_load[noun].keys():
+      if atmosphere_key not in event_atmosphere.keys():
+        event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
+      else:
+        if json_load[noun][atmosphere_key] > event_atmosphere[atmosphere_key]:
+          event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
+json_file.close()
+event_atmosphere_dict['はこだてMOMI-Gフェスタ'] = event_atmosphere
+
+new_json_file = open('event_atmosphere.json', 'w')
+json.dump(event_atmosphere_dict, new_json_file, indent=2, ensure_ascii=False)
+new_json_file.close()
