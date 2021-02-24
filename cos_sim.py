@@ -10,22 +10,26 @@ def prepare_vec():
   # 雰囲気辞書を読み込む
   json_file = open('event_atmosphere.json', 'r')
   json_load = json.load(json_file)
-  # イベント1の雰囲気を変数に格納
+  # 嗜好を定義
+  atmosphere_u = { "怖い": 0.03, "美しい": 0.04, "美味しい": 0.06 }
+  # イベントaの雰囲気を変数に格納
   atmosphere_a = json_load['はこだてMOMI-Gフェスタ']
-  # イベント2の雰囲気辞書を読み込む
+  # イベントbの雰囲気を変数に格納
   atmosphere_b = json_load['サル山温泉']
   # 比較するラベルを配列に格納
   keys = []
   keys_a = list(atmosphere_a.keys())
   keys_b = list(atmosphere_b.keys())
+  keys_u = list(atmosphere_u.keys())
   for key_a in keys_a:
     keys.append(key_a)
   for key_b in keys_b:
     keys.append(key_b)
   keys = list(set(keys))
-  # aとbのベクトルを準備
+  # aとbとuのベクトルを準備
   array_a = []
   array_b = []
+  array_u = []
   for key in keys:
     # aの値準備
     if key in keys_a:
@@ -37,11 +41,18 @@ def prepare_vec():
       array_b.append(atmosphere_b.get(key))
     else:
       array_b.append(0)
-    print(key)
+    # uの値準備
+    if key in keys_u:
+      array_u.append(atmosphere_u.get(key))
+    else:
+      array_u.append(0)
   a = np.array(array_a)
   b = np.array(array_b)
+  u = np.array(array_u)
   json_file.close()
-  return a, b
+  return a, b, u, atmosphere_u
 
-a, b = prepare_vec()
-print(cos_sim(a, b))
+a, b, u, a_u = prepare_vec()
+print('ユーザの嗜好: ' + str(a_u))
+print('はこだてMOMI-Gフェスタ: ' + str(cos_sim(u, a)))
+print('サル山温泉: ' + str(cos_sim(u, b)))
