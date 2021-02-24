@@ -2,6 +2,7 @@
 
 # 形態素解析に使う
 import MeCab
+import re
 
 # MeCabの準備
 mecab = MeCab.Tagger('-d /Users/kudoumasataka/my_local/homebrew/lib/mecab/dic/mecab-ipadic-neologd')
@@ -24,11 +25,14 @@ def wakati_text(text):
     word = node.feature.split(",")[6]
     # 品詞
     pos = node.feature.split(',')[0]
+    # 名詞の種類
+    subtype = node.feature.split(',')[1]
     # もし品詞が条件と一致してたら
     if pos in select_conditions:
-      adjective_words.append(word)
+      if subtype not in ['非自立', '接尾', '副詞可能']:
+        if not re.match(r"\d+(\w|[亜-熙])", word):
+          adjective_words.append(word)
     node = node.next
-  
   return adjective_words
 
 a = wakati_text(text)

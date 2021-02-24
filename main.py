@@ -6,8 +6,8 @@ import deleteBelowThreshold as d # 閾値以下削除
 import plot as p # グラフを描画
 
 ### 定数を定義 ###
-JA_NOUN = 'テスト'
-EN_NOUN = 'test'
+JA_NOUN = '幻想'
+EN_NOUN = 'gensou'
 SEARCH_COUNT = 100
 
 ### ツイートを収集 ###
