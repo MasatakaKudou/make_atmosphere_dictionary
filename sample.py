@@ -12,7 +12,7 @@ mecab.parse('')
 # 取り出したい品詞
 select_conditions = ['名詞']
 
-text = '函館公園内にある市立函館博物館に収蔵されている、縄文時代の土器や土偶などを展示。世界遺産に推薦されている「北海道・北東北の縄文遺跡群」の紹介コーナーも。函館公園内の市立函館博物館で、函館市内で発掘・収集された縄文の遺物が展示されています。時代の変遷がみられる土器をはじめ、バラエティ豊かな土偶、鹿の角で作られた角偶、愛らしいフォルムの動物土偶など、さまざまな遺物を見ることができます。函館市の史跡である大船遺跡・垣ノ島遺跡を含む「北海道・北東北の縄文遺跡群」は、ユネスコ世界遺産に推薦されており、構成する17の遺跡の紹介コーナーもあります。このほか、市立函館博物館では、常設展「はこだての歩み」（通史展示）、収蔵資料展「箱館戦争」も開かれています。'
+text = 'ロマンチックな雰囲気のあるベイエリアの運河に、期間限定の神社が出現。オリジナルの絵馬を購入して、願いをかけることができる。初詣、合格祈願などにどうぞ。金森赤レンガ倉庫にある運河に、1月1日～2月28日限定で神社が出現します。16～22時にはライトアップされ、厳かな雰囲気に。赤い鳥居の奥に浮かぶ神社は、函館総鎮守・函館八幡宮から魂入れを受けた由緒あるもの。金森洋物館・BAYはこだての各インフォメーションで絵馬（500円）を購入し、掛所に結べば願いがかなうかもしれません。絵馬を購入したかたには、函館八幡宮で祈祷した御福銭が進呈されます。期間終了後、掛所の絵馬は函館八幡宮に奉納されます。初詣や合格祈願、良縁祈願などにいかがでしょうか。'
 
 # 形態素解析
 def wakati_text(text):
@@ -40,22 +40,22 @@ def wakati_text(text):
   return adjective_words
 
 noun_list = list(set(wakati_text(text)))
-# print(noun_list)
-event_atmosphere = {}
-event_atmosphere_dict = {}
-json_file = open('atmosphere.json', 'r')
-json_load = json.load(json_file)
-for noun in noun_list:
-  if noun in json_load.keys():
-    for atmosphere_key in json_load[noun].keys():
-      if atmosphere_key not in event_atmosphere.keys():
-        event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
-      else:
-        if json_load[noun][atmosphere_key] > event_atmosphere[atmosphere_key]:
-          event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
-json_file.close()
-event_atmosphere_dict['市立函館博物館収蔵資料展'] = event_atmosphere
+print(noun_list)
+# event_atmosphere = {}
+# event_atmosphere_dict = {}
+# json_file = open('atmosphere.json', 'r')
+# json_load = json.load(json_file)
+# for noun in noun_list:
+#   if noun in json_load.keys():
+#     for atmosphere_key in json_load[noun].keys():
+#       if atmosphere_key not in event_atmosphere.keys():
+#         event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
+#       else:
+#         if json_load[noun][atmosphere_key] > event_atmosphere[atmosphere_key]:
+#           event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
+# json_file.close()
+# event_atmosphere_dict['市立函館博物館収蔵資料展'] = event_atmosphere
 
-new_json_file = open('event_atmosphere_1.json', 'w')
-json.dump(event_atmosphere_dict, new_json_file, indent=2, ensure_ascii=False)
-new_json_file.close()
+# new_json_file = open('event_atmosphere_1.json', 'w')
+# json.dump(event_atmosphere_dict, new_json_file, indent=2, ensure_ascii=False)
+# new_json_file.close()
