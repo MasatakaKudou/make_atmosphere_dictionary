@@ -17,7 +17,7 @@ kakasi.setMode('K', 'a')
 kakasi.setMode('J', 'a')
 conv = kakasi.getConverter()
 
-for noun in ['寒さ', '温室', 'しぐさ', '湯の川温泉', 'イベント', 'コミュニケーション', '足湯', '表情', '野外', '春の', '特別', '最終日', '一転', '不定期', 'プール', '利用', 'どこか', '好物']:
+for noun in ['幽玄', '五稜', '天気']:
   ### 日本語をローマ字に変更 ###
   ja_noun = noun
   en_noun = conv.do(ja_noun)

@@ -12,7 +12,7 @@ mecab.parse('')
 # 取り出したい品詞
 select_conditions = ['名詞']
 
-text = '12月から春の大型連休最終日まで、温泉にのんびりとつかるニホンザルの愛らしい姿が見られる。函館空港近くの湯の川温泉・函館市熱帯植物園で。園内に温室、足湯もあり。函館の冬の風物詩のひとつ、函館市熱帯植物園で温泉につかるニホンザル。サル山のプールに温泉を引き入れるのは、12月1日から春の大型連休最終日までの期間限定。野外の寒さや風雪をしのぐため、湯につかって温まるサルたちの愛くるしい表情やしぐさは、どこかユーモラスでかわいらしいと評判です。開園中はいつでも間近で観察できます（要入園料）。もっとコミュニケーションをとりたいなら、案内所で専用の「サルのエサ（100円）」を買って、柵越しにエサやり体験をすることも可能。不定期に、りんごなどの好物をプレゼントすることのできる特別イベントも企画されています。寒くなったら園内の足湯を利用したり、冬でも暖かい温室へ。北国の冬景色から一転、珍しい南国の植物が植えられた温室内は快適、休憩スペースも設けられています。'
+text = '冬の五稜郭公園の堀が約2000個の電球で彩られ、公園の周遊路を散策しながら楽しめる。堀の水が凍って雪が一面に積もると、柔らかい光に照らし出されて幻想的。数々の歴史の舞台となった特別史跡五稜郭跡は、星形にめぐらされた堀が特徴的。その堀を冬の間イルミネーションでふちどり、幻想的に浮かび上がらせるのが「五稜星の夢（ほしのゆめ）」です。点灯時間は日没から20時まで。堀の外周に設けられた歩行者専用道路（一周約1.8km、周回する場合の所要時間は30～40分）を散策すると、冬の初めの堀が凍るまでの期間は、水面に光が反射して揺らめき、華やかな雰囲気。堀に氷が張ると、スケートリンクのように輝きが増します。さらに、氷の上に雪が積もると一面真っ白になり、幽玄の世界に。時期や時間、天気、雪の有無で見え方が違うので、どんな景色に出会えるかはお楽しみです。'
 
 # 形態素解析
 def wakati_text(text):
@@ -40,7 +40,7 @@ def wakati_text(text):
   return adjective_words
 
 noun_list = list(set(wakati_text(text)))
-print(noun_list)
+# print(noun_list)
 event_atmosphere = {}
 event_atmosphere_dict = {}
 json_file = open('atmosphere.json', 'r')
@@ -54,7 +54,7 @@ for noun in noun_list:
         if json_load[noun][atmosphere_key] > event_atmosphere[atmosphere_key]:
           event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
 json_file.close()
-event_atmosphere_dict['はこだてMOMI-Gフェスタ'] = event_atmosphere
+event_atmosphere_dict['五稜星の夢'] = event_atmosphere
 
 new_json_file = open('event_atmosphere_1.json', 'w')
 json.dump(event_atmosphere_dict, new_json_file, indent=2, ensure_ascii=False)
