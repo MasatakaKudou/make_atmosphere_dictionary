@@ -40,22 +40,22 @@ def wakati_text(text):
   return adjective_words
 
 noun_list = list(set(wakati_text(text)))
-print(noun_list)
-# event_atmosphere = {}
-# event_atmosphere_dict = {}
-# json_file = open('atmosphere.json', 'r')
-# json_load = json.load(json_file)
-# for noun in noun_list:
-#   if noun in json_load.keys():
-#     for atmosphere_key in json_load[noun].keys():
-#       if atmosphere_key not in event_atmosphere.keys():
-#         event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
-#       else:
-#         if json_load[noun][atmosphere_key] > event_atmosphere[atmosphere_key]:
-#           event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
-# json_file.close()
-# event_atmosphere_dict['市立函館博物館収蔵資料展'] = event_atmosphere
+# print(noun_list)
+event_atmosphere = {}
+event_atmosphere_dict = {}
+json_file = open('atmosphere.json', 'r')
+json_load = json.load(json_file)
+for noun in noun_list:
+  if noun in json_load.keys():
+    for atmosphere_key in json_load[noun].keys():
+      if atmosphere_key not in event_atmosphere.keys():
+        event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
+      else:
+        if json_load[noun][atmosphere_key] > event_atmosphere[atmosphere_key]:
+          event_atmosphere[atmosphere_key] = json_load[noun][atmosphere_key]
+json_file.close()
+event_atmosphere_dict['冬の金森神社に願いごと'] = event_atmosphere
 
-# new_json_file = open('event_atmosphere_1.json', 'w')
-# json.dump(event_atmosphere_dict, new_json_file, indent=2, ensure_ascii=False)
-# new_json_file.close()
+new_json_file = open('event_atmosphere_1.json', 'w')
+json.dump(event_atmosphere_dict, new_json_file, indent=2, ensure_ascii=False)
+new_json_file.close()
