@@ -17,7 +17,7 @@ kakasi.setMode('K', 'a')
 kakasi.setMode('J', 'a')
 conv = kakasi.getConverter()
 
-for noun in ['幽玄', '五稜', '天気']:
+for noun in ['収蔵']:
   ### 日本語をローマ字に変更 ###
   ja_noun = noun
   en_noun = conv.do(ja_noun)
@@ -28,7 +28,7 @@ for noun in ['幽玄', '五稜', '天気']:
   # データを貯めるディレクトリを生成
   g_instance.make_dir(en_noun)
   # ツイートを収集
-  for day in list(range(19, 24)):
+  for day in list(range(21, 26)):
       params = {
         'since': f'2021-02-{day}_00:00:00_JST',
         'until': f'2021-02-{day}_23:59:59_JST',

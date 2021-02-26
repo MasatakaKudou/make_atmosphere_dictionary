@@ -18,11 +18,14 @@ def prepare_vec():
   atmosphere_b = json_load['サル山温泉']
   # イベントcの雰囲気を変数に格納
   atmosphere_c = json_load['五稜星の夢']
+  # イベントdの雰囲気を変数に格納
+  atmosphere_d = json_load['市立函館博物館収蔵資料展']
   # 比較するラベルを配列に格納
   keys = []
   keys_a = list(atmosphere_a.keys())
   keys_b = list(atmosphere_b.keys())
   keys_c = list(atmosphere_c.keys())
+  keys_d = list(atmosphere_d.keys())
   keys_u = list(atmosphere_u.keys())
   for key_a in keys_a:
     keys.append(key_a)
@@ -30,11 +33,14 @@ def prepare_vec():
     keys.append(key_b)
   for key_c in keys_c:
     keys.append(key_c)
+  for key_d in keys_d:
+    keys.append(key_d)
   keys = list(set(keys))
   # aとbとuのベクトルを準備
   array_a = []
   array_b = []
   array_c = []
+  array_d = []
   array_u = []
   for key in keys:
     # aの値準備
@@ -52,6 +58,11 @@ def prepare_vec():
       array_c.append(atmosphere_c.get(key))
     else:
       array_c.append(0)
+    # dの値準備
+    if key in keys_d:
+      array_d.append(atmosphere_d.get(key))
+    else:
+      array_d.append(0)
     # uの値準備
     if key in keys_u:
       array_u.append(atmosphere_u.get(key))
@@ -60,12 +71,14 @@ def prepare_vec():
   a = np.array(array_a)
   b = np.array(array_b)
   c = np.array(array_c)
+  d = np.array(array_d)
   u = np.array(array_u)
   json_file.close()
-  return a, b, c, u, atmosphere_u
+  return a, b, c, d, u, atmosphere_u
 
-a, b, c, u, a_u = prepare_vec()
+a, b, c, d, u, a_u = prepare_vec()
 print('ユーザの嗜好: ' + str(a_u))
 print('はこだてMOMI-Gフェスタ: ' + str(cos_sim(u, a)))
 print('サル山温泉: ' + str(cos_sim(u, b)))
 print('五稜星の夢: ' + str(cos_sim(u, c)))
+print('市立函館博物館収蔵資料展: ' + str(cos_sim(u, d)))
