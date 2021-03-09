@@ -1,1 +1,8 @@
-# make_atmosphere_dictionary
+## ファイル説明
+* atmosphere/
+  * どう言うものか
+    * 雰囲気辞書に使っていたデータを溜めている
+  * データ構成
+    noun / 名詞
+      - noun_d.json / 閾値0.03以下を削除した雰囲気
+      - 

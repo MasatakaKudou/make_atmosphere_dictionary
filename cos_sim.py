@@ -11,7 +11,7 @@ def prepare_vec():
   json_file = open('event_atmosphere.json', 'r')
   json_load = json.load(json_file)
   # 嗜好を定義(実験ではここを手動で変化させる)
-  atmosphere_u = json_load['冬の金森神社に願いごと']
+  atmosphere_u = json_load['はこだてMOMI-Gフェスタ']
   # イベントaの雰囲気を変数に格納
   atmosphere_a = json_load['はこだてMOMI-Gフェスタ']
   # イベントbの雰囲気を変数に格納
